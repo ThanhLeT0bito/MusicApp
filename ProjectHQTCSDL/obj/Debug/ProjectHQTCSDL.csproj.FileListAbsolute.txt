@@ -65,7 +65,11 @@ C:\Users\GF\source\repos\ProjectHQTCSDL\ProjectHQTCSDL\bin\System.Web.Webpages.R
 C:\Users\GF\source\repos\ProjectHQTCSDL\ProjectHQTCSDL\bin\System.Web.Helpers.xml
 C:\Users\GF\source\repos\ProjectHQTCSDL\ProjectHQTCSDL\bin\System.Web.Mvc.xml
 C:\Users\GF\source\repos\ProjectHQTCSDL\ProjectHQTCSDL\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\GF\source\repos\ProjectHQTCSDL\ProjectHQTCSDL\obj\Debug\ProjectHQTCSDL.csproj.AssemblyReference.cache
 C:\Users\GF\source\repos\ProjectHQTCSDL\ProjectHQTCSDL\obj\Debug\ProjectHQTCSDL.csproj.CoreCompileInputs.cache
 C:\Users\GF\source\repos\ProjectHQTCSDL\ProjectHQTCSDL\obj\Debug\ProjectHQTCSDL.dll
 C:\Users\GF\source\repos\ProjectHQTCSDL\ProjectHQTCSDL\obj\Debug\ProjectHQTCSDL.pdb
+C:\Users\GF\source\repos\ProjectHQTCSDL\ProjectHQTCSDL\bin\EntityFramework.dll
+C:\Users\GF\source\repos\ProjectHQTCSDL\ProjectHQTCSDL\bin\EntityFramework.SqlServer.dll
+C:\Users\GF\source\repos\ProjectHQTCSDL\ProjectHQTCSDL\bin\EntityFramework.xml
+C:\Users\GF\source\repos\ProjectHQTCSDL\ProjectHQTCSDL\bin\EntityFramework.SqlServer.xml
+C:\Users\GF\source\repos\ProjectHQTCSDL\ProjectHQTCSDL\obj\Debug\ProjectHQTCSDL.csproj.AssemblyReference.cache

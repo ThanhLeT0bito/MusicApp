@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProjectMusicModelStoreContainer" CdmEntityContainer="ProjectMusicEntities">
+    <EntitySetMapping Name="CaSis">
+      <EntityTypeMapping TypeName="ProjectMusicModel.CaSi">
+        <MappingFragment StoreEntitySet="CaSi">
+          <ScalarProperty Name="idCaSi" ColumnName="idCaSi" />
+          <ScalarProperty Name="tenCaSi" ColumnName="tenCaSi" />
+          <ScalarProperty Name="imgCaSi" ColumnName="imgCaSi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="ProjectMusicModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+          <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+          <ScalarProperty Name="ngayTao" ColumnName="ngayTao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Category_Item">
+      <EntityTypeMapping TypeName="ProjectMusicModel.Category_Item">
+        <MappingFragment StoreEntitySet="Category_Item">
+          <ScalarProperty Name="idCT" ColumnName="idCT" />
+          <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+          <ScalarProperty Name="idMusic" ColumnName="idMusic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="ProjectMusicModel.Comment">
+        <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="idComment" ColumnName="idComment" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="commentContent" ColumnName="commentContent" />
+          <ScalarProperty Name="idMusic" ColumnName="idMusic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="loaiUsers">
+      <EntityTypeMapping TypeName="ProjectMusicModel.loaiUser">
+        <MappingFragment StoreEntitySet="loaiUser">
+          <ScalarProperty Name="idLoaiUser" ColumnName="idLoaiUser" />
+          <ScalarProperty Name="tenLoaiUser" ColumnName="tenLoaiUser" />
+          <ScalarProperty Name="thoiGianPhanQuyen" ColumnName="thoiGianPhanQuyen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lyrics">
+      <EntityTypeMapping TypeName="ProjectMusicModel.Lyric">
+        <MappingFragment StoreEntitySet="Lyric">
+          <ScalarProperty Name="idLyric" ColumnName="idLyric" />
+          <ScalarProperty Name="loiBaihat" ColumnName="loiBaihat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Musics">
+      <EntityTypeMapping TypeName="ProjectMusicModel.Music">
+        <MappingFragment StoreEntitySet="Music">
+          <ScalarProperty Name="imgMusic" ColumnName="imgMusic" />
+          <ScalarProperty Name="idMusic" ColumnName="idMusic" />
+          <ScalarProperty Name="idCaSi" ColumnName="idCaSi" />
+          <ScalarProperty Name="idtacGia" ColumnName="idtacGia" />
+          <ScalarProperty Name="idLyric" ColumnName="idLyric" />
+          <ScalarProperty Name="tenBaiHat" ColumnName="tenBaiHat" />
+          <ScalarProperty Name="urlBaiHat" ColumnName="urlBaiHat" />
+          <ScalarProperty Name="thongTinBaiHat" ColumnName="thongTinBaiHat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Playlists">
+      <EntityTypeMapping TypeName="ProjectMusicModel.Playlist">
+        <MappingFragment StoreEntitySet="Playlist">
+          <ScalarProperty Name="idPlaylist" ColumnName="idPlaylist" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="tenPlaylist" ColumnName="tenPlaylist" />
+          <ScalarProperty Name="ngayTao" ColumnName="ngayTao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Playlist_Item">
+      <EntityTypeMapping TypeName="ProjectMusicModel.Playlist_Item">
+        <MappingFragment StoreEntitySet="Playlist_Item">
+          <ScalarProperty Name="idPI" ColumnName="idPI" />
+          <ScalarProperty Name="idPlaylist" ColumnName="idPlaylist" />
+          <ScalarProperty Name="idMusic" ColumnName="idMusic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profiles">
+      <EntityTypeMapping TypeName="ProjectMusicModel.Profile">
+        <MappingFragment StoreEntitySet="Profile">
+          <ScalarProperty Name="idProfile" ColumnName="idProfile" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="tenNguoiDung" ColumnName="tenNguoiDung" />
+          <ScalarProperty Name="diaChi" ColumnName="diaChi" />
+          <ScalarProperty Name="sdt" ColumnName="sdt" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="ProjectMusicModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TacGias">
+      <EntityTypeMapping TypeName="ProjectMusicModel.TacGia">
+        <MappingFragment StoreEntitySet="TacGia">
+          <ScalarProperty Name="idTacGia" ColumnName="idTacGia" />
+          <ScalarProperty Name="tenTacGia" ColumnName="tenTacGia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserMains">
+      <EntityTypeMapping TypeName="ProjectMusicModel.UserMain">
+        <MappingFragment StoreEntitySet="UserMain">
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="tenDangNhap" ColumnName="tenDangNhap" />
+          <ScalarProperty Name="matKhau" ColumnName="matKhau" />
+          <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="view_getSongFromAdeleSinger">
+      <EntityTypeMapping TypeName="ProjectMusicModel.view_getSongFromAdeleSinger">
+        <MappingFragment StoreEntitySet="view_getSongFromAdeleSinger">
+          <ScalarProperty Name="idMusic" ColumnName="idMusic" />
+          <ScalarProperty Name="idCaSi" ColumnName="idCaSi" />
+          <ScalarProperty Name="idtacGia" ColumnName="idtacGia" />
+          <ScalarProperty Name="idLyric" ColumnName="idLyric" />
+          <ScalarProperty Name="tenBaiHat" ColumnName="tenBaiHat" />
+          <ScalarProperty Name="urlBaiHat" ColumnName="urlBaiHat" />
+          <ScalarProperty Name="thongTinBaiHat" ColumnName="thongTinBaiHat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="view_getSongUsukCategoty">
+      <EntityTypeMapping TypeName="ProjectMusicModel.view_getSongUsukCategoty">
+        <MappingFragment StoreEntitySet="view_getSongUsukCategoty">
+          <ScalarProperty Name="idMusic" ColumnName="idMusic" />
+          <ScalarProperty Name="idCaSi" ColumnName="idCaSi" />
+          <ScalarProperty Name="idtacGia" ColumnName="idtacGia" />
+          <ScalarProperty Name="idLyric" ColumnName="idLyric" />
+          <ScalarProperty Name="tenBaiHat" ColumnName="tenBaiHat" />
+          <ScalarProperty Name="urlBaiHat" ColumnName="urlBaiHat" />
+          <ScalarProperty Name="thongTinBaiHat" ColumnName="thongTinBaiHat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="view_singerAll">
+      <EntityTypeMapping TypeName="ProjectMusicModel.view_singerAll">
+        <MappingFragment StoreEntitySet="view_singerAll">
+          <ScalarProperty Name="idCaSi" ColumnName="idCaSi" />
+          <ScalarProperty Name="tenCaSi" ColumnName="tenCaSi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="view_songAll">
+      <EntityTypeMapping TypeName="ProjectMusicModel.view_songAll">
+        <MappingFragment StoreEntitySet="view_songAll">
+          <ScalarProperty Name="idMusic" ColumnName="idMusic" />
+          <ScalarProperty Name="idCaSi" ColumnName="idCaSi" />
+          <ScalarProperty Name="idtacGia" ColumnName="idtacGia" />
+          <ScalarProperty Name="idLyric" ColumnName="idLyric" />
+          <ScalarProperty Name="tenBaiHat" ColumnName="tenBaiHat" />
+          <ScalarProperty Name="urlBaiHat" ColumnName="urlBaiHat" />
+          <ScalarProperty Name="thongTinBaiHat" ColumnName="thongTinBaiHat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="view_tacGiaAll">
+      <EntityTypeMapping TypeName="ProjectMusicModel.view_tacGiaAll">
+        <MappingFragment StoreEntitySet="view_tacGiaAll">
+          <ScalarProperty Name="idTacGia" ColumnName="idTacGia" />
+          <ScalarProperty Name="tenTacGia" ColumnName="tenTacGia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionName="ProjectMusicModel.Store.TimKiemNhac" FunctionImportName="TimKiemNhac">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjectMusicModel.TimKiemNhac_Result">
+          <ScalarProperty Name="idMusic" ColumnName="idMusic" />
+          <ScalarProperty Name="idCaSi" ColumnName="idCaSi" />
+          <ScalarProperty Name="idtacGia" ColumnName="idtacGia" />
+          <ScalarProperty Name="idLyric" ColumnName="idLyric" />
+          <ScalarProperty Name="tenBaiHat" ColumnName="tenBaiHat" />
+          <ScalarProperty Name="urlBaiHat" ColumnName="urlBaiHat" />
+          <ScalarProperty Name="thongTinBaiHat" ColumnName="thongTinBaiHat" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionName="ProjectMusicModel.Store.TimKiemNhacTheoTenCaSi" FunctionImportName="TimKiemNhacTheoTenCaSi">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjectMusicModel.TimKiemNhacTheoTenCaSi_Result">
+          <ScalarProperty Name="idMusic" ColumnName="idMusic" />
+          <ScalarProperty Name="idCaSi" ColumnName="idCaSi" />
+          <ScalarProperty Name="idtacGia" ColumnName="idtacGia" />
+          <ScalarProperty Name="tenBaiHat" ColumnName="tenBaiHat" />
+          <ScalarProperty Name="urlBaiHat" ColumnName="urlBaiHat" />
+          <ScalarProperty Name="thongTinBaiHat" ColumnName="thongTinBaiHat" />
+          <ScalarProperty Name="idLyric" ColumnName="idLyric" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionName="ProjectMusicModel.Store.TimKiemTheLoai" FunctionImportName="TimKiemTheLoai">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjectMusicModel.TimKiemTheLoai_Result">
+          <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+          <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+          <ScalarProperty Name="ngayTao" ColumnName="ngayTao" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="DeleteMusicById" FunctionName="ProjectMusicModel.Store.DeleteMusicById" />
+    <FunctionImportMapping FunctionImportName="find_song_by_category" FunctionName="ProjectMusicModel.Store.find_song_by_category">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjectMusicModel.find_song_by_category_Result">
+          <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+          <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+          <ScalarProperty Name="ngayTao" ColumnName="ngayTao" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="find_song_by_Singer" FunctionName="ProjectMusicModel.Store.find_song_by_Singer">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjectMusicModel.find_song_by_Singer_Result">
+          <ScalarProperty Name="idCaSi" ColumnName="idCaSi" />
+          <ScalarProperty Name="tenCaSi" ColumnName="tenCaSi" />
+          <ScalarProperty Name="imgCaSi" ColumnName="imgCaSi" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_AddMusic" FunctionName="ProjectMusicModel.Store.sp_AddMusic" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ProjectMusicModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ProjectMusicModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_deletePlaylist" FunctionName="ProjectMusicModel.Store.sp_deletePlaylist" />
+    <FunctionImportMapping FunctionImportName="sp_DeletePlaylistItemById" FunctionName="ProjectMusicModel.Store.sp_DeletePlaylistItemById" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ProjectMusicModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ProjectMusicModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjectMusicModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ProjectMusicModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjectMusicModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ProjectMusicModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_ThemBaiHatVaoPlaylist" FunctionName="ProjectMusicModel.Store.sp_ThemBaiHatVaoPlaylist" />
+    <FunctionImportMapping FunctionImportName="sp_ThemCaSi" FunctionName="ProjectMusicModel.Store.sp_ThemCaSi" />
+    <FunctionImportMapping FunctionImportName="sp_ThemPlaylist" FunctionName="ProjectMusicModel.Store.sp_ThemPlaylist" />
+    <FunctionImportMapping FunctionImportName="sp_ThemTacGia" FunctionName="ProjectMusicModel.Store.sp_ThemTacGia" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ProjectMusicModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="UpdateMusic" FunctionName="ProjectMusicModel.Store.UpdateMusic" />
+  </EntityContainerMapping>
+</Mapping>
