@@ -1,13 +1,14 @@
-﻿@model IEnumerable<ProjectHQTCSDL.Models.Category_Item>
+﻿@model IEnumerable<ProjectHQTCSDL.Models.Playlist_Item>
 @{
-    ViewBag.Title = "OpenCategory";
+    ViewBag.Title = "ShowPlaylist";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 <div style="height:150px;"> </div>
 <div style="padding: 20px;">
     <div class="container" style="height: 100px; width: 100%; display: flex; justify-content:center; align-items:center; border: 1px solid white; margin-right: 20px; border-radius: 10px; margin-bottom: 10px;">
-        <strong style="font-size: 45px; color: #36e2ec;"> @ViewBag.nameCategory </strong>
+        <strong style="font-size: 45px; color: #36e2ec;"> @ViewBag.namePlaylist </strong>
     </div>
 
     @if (Model == null)
@@ -35,7 +36,7 @@
                         @getMusic.tenBaiHat
                         <div class="subtitle" style=" font-size: 9px; color: #4c5262;">@getSinger.tenCaSi</div>
                     </h5>
-                    <a href="@Url.Action("ChangeMusicCate", "Home", new {idMusic = item.idMusic, idCategory = item.idCategory })">
+                    <a href="@Url.Action("ChangeMusic", "Home", new {idMusic = item.idMusic})">
                         <i class="bi playListPlay bi-play-circle-fill" id="1" style=" position: absolute; right: 15px; top: 6px; font-size: 16px;"></i>
                     </a>
                 </li>
@@ -45,4 +46,6 @@
         }
     }
 </div>
+
+
 

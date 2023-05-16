@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ProjectHQTCSDL.Models.Music>
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="height: 150px;"></div>
+<div style="padding: 20px;">
+    <h3 style="margin-bottom: 10px;">Kết Quả Tìm Kiếm:  @ViewBag.inputSearch</h3>
+    @if (!string.IsNullOrEmpty(ViewBag.MessageSearch))
+    {
+        <div class="alert-box" style="height:320px;">
+            <p class="error-message">@ViewBag.MessageSearch</p>
+        </div>
+    }
+    else
+    {
+        ProjectHQTCSDL.Models.ProjectMusicEntities db = new ProjectHQTCSDL.Models.ProjectMusicEntities();
+        int dem = 1;
+        foreach (var item in Model)
+        {
+            var getMusic = db.Musics.FirstOrDefault(x => x.idMusic == item.idMusic);
+            if (getMusic != null)
+            {
+                var getSinger = db.CaSis.FirstOrDefault(x => x.idCaSi == getMusic.idCaSi);
+                <li class="songItem" style="position: relative; list-style-type: none; padding: 5px 0px 5px 20px; display: flex; align-items: center; margin-bottom: 10px; cursor: pointer; transition: .3s linear; border: .5px solid white; border-radius: 10px; margin-bottom: 10px;">
+                    <span>@dem</span>
+                    <img src="~/Images/@getMusic.imgMusic" alt="Alan" style="width: 32px; height: 32px; margin-left: 25px; object-fit:cover;">
+                    <h5 style="font-size: 11px; margin-left: 15px;">
+                        @getMusic.tenBaiHat
+                        <div class="subtitle" style=" font-size: 9px; color: #4c5262;">@getSinger.tenCaSi</div>
+                    </h5>
+                    @if (Session["Playlist"] != null) {
+                        var getPlaylist = Session["Playlist"] as ProjectHQTCSDL.Models.Playlist;
+                        <a href="@Url.Action("AddMusicToPlaylist", "Home", new {idMusic = item.idMusic })" style="text-decoration: none; color: aqua; position: absolute; right: 40px; top: 10px;font-size: 13px; "> 
+                            <i class="fa-solid fa-circle-plus"></i> @getPlaylist.tenPlaylist
+                        </a>
+                    }
+                    <a href="@Url.Action("ChangeMusic", "Home", new {idMusic = item.idMusic })">
+                        <i class="bi playListPlay bi-play-circle-fill" id="1" style=" position: absolute; right: 15px; top: 6px; font-size: 16px;"></i>
+                    </a>
+                </li>
+                dem++;
+            }
+
+        }
+    }
+
+</div>

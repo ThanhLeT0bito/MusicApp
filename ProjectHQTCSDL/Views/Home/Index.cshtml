@@ -38,7 +38,7 @@
                     var getSinger = db.CaSis.Where(x => x.idCaSi == item.idCaSi).ToList();
                     <li class="songItem">
                         <div class="img_play">
-                            <img style="object-fit: cover;" src="Images/@item.imgMusic" alt="alan">
+                            <img style="object-fit: cover;" src="~/Images/@item.imgMusic" alt="alan">
                             <a style="position: absolute; top: 45px; left: 35px;" href="@Url.Action("ChangeMusic", "Home", new {idMusic = item.idMusic })">
                                 <i class="bi playListPlay bi-play-circle-fill" id="7"></i>
                             </a>
@@ -101,7 +101,10 @@
                 foreach (var item in getListSinger)
                 {
                     <li>
-                        <img style="object-fit:cover;" src="Images/@item.imgCaSi" alt="Arjit Singh" title="Arjit Singh">
+                        <a href="@Url.Action("OpenMusicFromSinger", "Home", new {idCaSi = item.idCaSi })">
+                            <img style="object-fit:cover;" src="~/Images/@item.imgCaSi" alt="Arjit Singh" title="Arjit Singh">
+
+                        </a>
                     </li>
                 }
             }

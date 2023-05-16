@@ -7,6 +7,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/Content/StyleMain.css">
     <title>Music App</title>
+    <script src="https://kit.fontawesome.com/c0b1a641d5.js" crossorigin="anonymous"></script>
+    <style>
+        .song_side::-webkit-scrollbar {
+            width: 5px;
+            background-color: #F5F5F5;
+        }
+        .song_side::-webkit-scrollbar-thumb {
+            background-color: aqua;
+        }
+    </style>
 </head>
 
 <body>
@@ -14,9 +24,59 @@
         <div class="menu_side">
             <h1>Playlist</h1>
             <div class="playlist">
-                <h4 class="active"><span></span><i class="bi bi-music-note-beamed"></i> Playlist</h4>
-                <h4><span></span><i class="bi bi-music-note-beamed"></i> Last Listening</h4>
-                <h4><span></span><i class="bi bi-music-note-beamed"></i> Recommended</h4>
+                <h4 class="active">
+                    <span></span>
+                    <i class="bi bi-music-note-beamed"></i>
+                    Playlist
+                    @* margin-top: -10px; *@
+                    <a href="@Url.Action("ShowInputPlaylist", "Home")" style="position: absolute; right: 15px; font-size: 20px;">
+                        <i  class="fa-solid fa-square-plus"></i>
+                    </a>
+                </h4>
+                @* form input add Playlist *@
+
+                @if (Session["ShowInputPlaylist"] != null)
+                {
+                    using (Html.BeginForm("AddPlaylist", "Home", FormMethod.Post))
+                    {
+            <div style="display:flex;">
+
+
+                <div style="margin-right: 20px;">
+                    <input type="text" id="inputValue" name="inputValue" placeholder="Input Name Playlist" style="border: none; padding: 5px; border-radius: 5px;" />
+                </div>
+                <button type="submit" style="background-color: black; border: 3px solid aqua; color: aqua; padding: 5px;">Add</button>
+            </div>
+                    }
+                }
+
+                @if (ViewBag.Message != null)
+                {
+                    <h4>@ViewBag.Message</h4>
+                }
+
+                @{
+                    ProjectHQTCSDL.Models.ProjectMusicEntities db = new ProjectHQTCSDL.Models.ProjectMusicEntities();
+                    var getUser = Session["User"] as ProjectHQTCSDL.Models.UserMain;
+                    if (getUser != null)
+                    {
+                        var getPlaylist = db.Playlists.Where(x => x.idUser == getUser.idUser).ToList();
+                        foreach (var item in getPlaylist)
+                        {
+                            <h4><span></span><i class="bi bi-music-note-beamed"></i> 
+                                <a href="@Url.Action("ShowPlaylist", "Home", new {idPLaylist = item.idPlaylist })" style="text-decoration:none; color:white; display: flex;justify-content: space-between;">
+                                    @item.tenPlaylist  
+                                    <a href="@Url.Action("SelectedPlaylist", "Home", new {idPlaylist = item.idPlaylist })" style="position: absolute; right: 15px; font-size: 20px; color: aqua">
+                                        <i  class="fa-solid fa-square-plus"></i>
+                                    </a>
+                                </a>
+                            </h4>
+                        }
+                    }
+
+
+                }
+                @*<h4><span></span><i class="bi bi-music-note-beamed"></i> Recommended</h4>*@
             </div>
             <div class="menu_song">
                 <li class="songItem">
@@ -76,7 +136,7 @@
             </div>
         </div>
 
-        <div class="song_side" style="overflow: auto;">
+        <div class="song_side" style="overflow: auto; padding-bottom: 10px;">
             @* header *@
             <nav>
                 <ul>
@@ -85,8 +145,13 @@
                     <li>RADIO</li>
                 </ul>
                 <div class="search">
-                    <i class="bi bi-search"></i>
-                    <input type="text" placeholder="Search Music...">
+                    <form method="get" class="search_btn_try" action="/Home/Search" style="display: flex">
+                        <button style="border: none; background: none; color: white;" type="submit" class="bi bi-search"></button>
+                        <input type="text" name="search" placeholder="Search Music....">
+                        @*<button type="submit" style="border: none"><i class="fa-solid fa-magnifying-glass"></i></button>*@
+                    </form>
+                    @*<i class="bi bi-search"></i>
+                    <input type="text" placeholder="Search Music...">*@
                 </div>
                 <div class="user">
                     <img src="~/img/KDS CODER.png" alt="User" title="KDS CODER (Jahid Khan)">
@@ -104,7 +169,7 @@
             <div class="wave1"></div>
         </div>
         @{
-            ProjectHQTCSDL.Models.ProjectMusicEntities db = new ProjectHQTCSDL.Models.ProjectMusicEntities();
+           
             var getBaiHat = Session["BaiHat"] as ProjectHQTCSDL.Models.Music;
             var getSingerMaster = new List<ProjectHQTCSDL.Models.CaSi>();
             if (getBaiHat != null)

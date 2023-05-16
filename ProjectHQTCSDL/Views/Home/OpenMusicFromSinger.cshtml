@@ -1,15 +1,16 @@
-﻿@model IEnumerable<ProjectHQTCSDL.Models.Category_Item>
+﻿@model IEnumerable<ProjectHQTCSDL.Models.Music>
 @{
-    ViewBag.Title = "OpenCategory";
+    ViewBag.Title = "OpenMusicFromSinger";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div style="height:150px;"> </div>
-<div style="padding: 20px;">
-    <div class="container" style="height: 100px; width: 100%; display: flex; justify-content:center; align-items:center; border: 1px solid white; margin-right: 20px; border-radius: 10px; margin-bottom: 10px;">
-        <strong style="font-size: 45px; color: #36e2ec;"> @ViewBag.nameCategory </strong>
+<div style="margin-left: 50px; width: 200px; height: 250px;">
+    <img src="~/Images/@ViewBag.Singer.imgCaSi"  style="height:100%; width: 100%; object-fit:cover; border-radius: 50%; border:2px solid aqua; "/>
+</div>
+<div style="padding:20px;">
+    <div class="container" style="height: 80px; width: 100%; display: flex; justify-content:center; align-items:center; border: 1px solid aqua; margin-right: 20px; border-radius: 10px; margin-bottom: 10px;">
+        <strong style="font-size: 40px; color: #36e2ec;"> @ViewBag.Singer.tenCaSi </strong>
     </div>
-
     @if (Model == null)
     {
         <h2 style="display: flex; justify-content:center;">Hiện Tại Chưa có Bài Hát nào</h2>
@@ -24,23 +25,20 @@
         int dem = 1;
         foreach (var item in Model)
         {
-            var getMusic = db.Musics.FirstOrDefault(x => x.idMusic == item.idMusic);
-            if (getMusic != null)
-            {
-                var getSinger = db.CaSis.FirstOrDefault(x => x.idCaSi == getMusic.idCaSi);
+            
+                var getSinger = db.CaSis.FirstOrDefault(x => x.idCaSi == item.idCaSi);
                 <li class="songItem" style="position: relative; list-style-type: none; padding: 5px 0px 5px 20px; display: flex; align-items: center; margin-bottom: 10px; cursor: pointer; transition: .3s linear;">
                     <span>@dem</span>
-                    <img src="~/Images/@getMusic.imgMusic" alt="Alan" style="width: 32px; height: 32px; margin-left: 25px; object-fit:cover;">
+                    <img src="~/Images/@item.imgMusic" alt="Alan" style="width: 32px; height: 32px; margin-left: 25px; object-fit:cover;">
                     <h5 style="font-size: 11px; margin-left: 15px;">
-                        @getMusic.tenBaiHat
+                        @item.tenBaiHat
                         <div class="subtitle" style=" font-size: 9px; color: #4c5262;">@getSinger.tenCaSi</div>
                     </h5>
-                    <a href="@Url.Action("ChangeMusicCate", "Home", new {idMusic = item.idMusic, idCategory = item.idCategory })">
+                    <a href="@Url.Action("ChangeMusic", "Home", new {idMusic = item.idMusic })">
                         <i class="bi playListPlay bi-play-circle-fill" id="1" style=" position: absolute; right: 15px; top: 6px; font-size: 16px;"></i>
                     </a>
                 </li>
                 dem++;
-            }
 
         }
     }
