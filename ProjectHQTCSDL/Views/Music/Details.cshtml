@@ -1,0 +1,75 @@
+﻿@model ProjectHQTCSDL.Models.Music
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Music</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tenBaiHat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenBaiHat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.urlBaiHat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.urlBaiHat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.thongTinBaiHat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.thongTinBaiHat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imgMusic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imgMusic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CaSi.tenCaSi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CaSi.tenCaSi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lyric.loiBaihat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lyric.loiBaihat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TacGia.tenTacGia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TacGia.tenTacGia)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idMusic }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<ProjectHQTCSDL.Models.TacGia>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tenTacGia)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tenTacGia)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idTacGia }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idTacGia }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idTacGia })
+        </td>
+    </tr>
+}
+
+</table>

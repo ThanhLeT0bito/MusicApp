@@ -14,7 +14,6 @@ namespace ProjectHQTCSDL.Controllers
         // GET: Home
 
         ProjectMusicEntities db = new ProjectMusicEntities();
-        private SqlDbType keyword;
 
         public ActionResult Index()
         {

@@ -1,0 +1,35 @@
+﻿@model ProjectHQTCSDL.Models.CaSi
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CaSi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tenCaSi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenCaSi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imgCaSi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imgCaSi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idCaSi }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

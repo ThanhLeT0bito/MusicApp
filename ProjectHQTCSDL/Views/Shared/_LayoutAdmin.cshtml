@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="https://kit.fontawesome.com/c0b1a641d5.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/Content/StyleMain.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <style>
+        .song_side::-webkit-scrollbar {
+            width: 5px;
+            background-color: #F5F5F5;
+        }
+
+        .song_side::-webkit-scrollbar-thumb {
+            background-color: aqua;
+        }
+
+        audio {
+            height: 40px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <div class="menu_side">
+            <h1>Management</h1>
+            <div class="playlist">
+                <h4 style="font-size: 18px;" class="active">
+                    <span></span>
+                    <i class="bi bi-music-note-beamed"></i>
+                    Musician
+                    @* margin-top: -10px; *@
+                    <a href="@Url.Action("Index", "TacGias")" style="position: absolute; right: 15px; font-size: 20px;">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                </h4>
+                <h4 style="font-size: 18px;" class="active">
+                    <span></span>
+                    <i class="bi bi-music-note-beamed"></i>
+                    Singer
+                    @* margin-top: -10px; *@
+                    <a href="@Url.Action("Index", "CaSis")" style="position: absolute; right: 15px; font-size: 20px;">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                </h4>
+                <h4 style="font-size: 18px;" class="active">
+                    <span></span>
+                    <i class="bi bi-music-note-beamed"></i>
+                    Songs
+                    @* margin-top: -10px; *@
+                    <a href="@Url.Action("Index", "Music")" style="position: absolute; right: 15px; font-size: 20px;">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                </h4>
+                <h4 style="font-size: 18px;" class="active">
+                    <span></span>
+                    <i class="bi bi-music-note-beamed"></i>
+                    Category
+                    @* margin-top: -10px; *@
+                    <a href="@Url.Action("ShowInputCategory", "HomeAdmin")" style="position: absolute; right: 15px; font-size: 20px;">
+                        <i class="fa-solid fa-square-plus"></i>
+                    </a>
+                </h4>
+                @* form input add Playlist *@
+
+                @if (Session["ShowInputCategory"] != null)
+                {
+                    using (Html.BeginForm("AddCategory", "HomeAdmin", FormMethod.Post))
+                    {
+                        <div style="display:flex;">
+
+
+                            <div style="margin-right: 20px;">
+                                <input type="text" id="inputValue" name="inputValue" placeholder="Input Name Category" style="border: none; padding: 5px; border-radius: 5px;" />
+                            </div>
+                            <button type="submit" style="background-color: black; border: 3px solid aqua; color: aqua; padding: 5px;">Add</button>
+                        </div>
+                    }
+                }
+
+                @if (ViewBag.Message != null)
+                {
+                    <h4>@ViewBag.Message</h4>
+                }
+
+                @{
+                    ProjectHQTCSDL.Models.ProjectMusicEntities db = new ProjectHQTCSDL.Models.ProjectMusicEntities();
+                    var getUser = Session["User"] as ProjectHQTCSDL.Models.UserMain;
+
+                    var getCategory = db.Categories.ToList();
+                    foreach (var item in getCategory)
+                    {
+                        <h4>
+                            <span></span><i class="bi bi-music-note-beamed"></i>
+                            <a href="@Url.Action("OpenCategory", "HomeAdmin",new { idcategory = item.idCategory})" style="text-decoration:none; color:white; display: flex;justify-content: space-between;">
+                                @item.nameCategory
+                                <a href="@Url.Action("SelectedCategory", "HomeAdmin",  new { idCategory = item.idCategory })" style="position: absolute; right: 15px; font-size: 20px; color: aqua">
+                                    <i class="fa-solid fa-square-plus"></i>
+                                </a>
+                            </a>
+                        </h4>
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="song_side" style="overflow: auto; padding-bottom: 10px;">
+            @* header *@
+            <nav>
+                <ul>
+                    <a href="@Url.Action("Index", "HomeAdmin")">
+                    <li>Discover<span></span></li> </a>
+                    <li>MY LIBRARY</li>
+                    <li>RADIO</li>
+                </ul>
+                <div class="search">
+                    <form method="get" class="search_btn_try" action="/HomeAdmin/Search" style="display: flex">
+                        <button style="border: none; background: none; color: white;" type="submit" class="bi bi-search"></button>
+                        <input type="text" name="search" placeholder="Search Music....">
+                        @*<button type="submit" style="border: none"><i class="fa-solid fa-magnifying-glass"></i></button>*@
+                    </form>
+                    @*<i class="bi bi-search"></i>
+                        <input type="text" placeholder="Search Music...">*@
+                </div>
+                <div class="user">
+                    <img src="~/img/KDS CODER.png" alt="User" title="KDS CODER (Jahid Khan)">
+                </div>
+            </nav>
+
+            @RenderBody()
+
+        </div>
+    </header>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ProjectHQTCSDL.Models.Category_Item>
+@{
+    ViewBag.Title = "OpenCategory";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div style="height:150px;"> </div>
+<div style="padding: 20px;">
+    <div class="container" style="height: 100px; width: 100%; display: flex; justify-content:center; align-items:center; border: 1px solid white; margin-right: 20px; border-radius: 10px; margin-bottom: 10px;">
+        <strong style="font-size: 45px; color: #36e2ec;"> @ViewBag.nameCategory </strong>
+    </div>
+
+    @if (Model == null)
+    {
+        <h2 style="display: flex; justify-content:center;">Hiện Tại Chưa có Bài Hát nào</h2>
+    }
+    else if (@ViewBag.sl == 0)
+    {
+        <h2 style="display: flex; justify-content:center;">Hiện Tại Chưa có Bài Hát nào</h2>
+    }
+    else
+    {
+        ProjectHQTCSDL.Models.ProjectMusicEntities db = new ProjectHQTCSDL.Models.ProjectMusicEntities();
+        int dem = 1;
+        foreach (var item in Model)
+        {
+            var getMusic = db.Musics.FirstOrDefault(x => x.idMusic == item.idMusic);
+            if (getMusic != null)
+            {
+                var getSinger = db.CaSis.FirstOrDefault(x => x.idCaSi == getMusic.idCaSi);
+                <li class="songItem" style="position: relative; list-style-type: none; padding: 5px 0px 5px 20px; display: flex; align-items: center; margin-bottom: 10px; cursor: pointer; transition: .3s linear;">
+                    <span>@dem</span>
+                    <img src="~/Images/@getMusic.imgMusic" alt="Alan" style="width: 32px; height: 32px; margin-left: 25px; object-fit:cover;">
+                    <h5 style="font-size: 11px; margin-left: 15px;">
+                        @getMusic.tenBaiHat
+                        <div class="subtitle" style=" font-size: 9px; color: #4c5262;">@getSinger.tenCaSi</div>
+                    </h5>
+                    <a href="@Url.Action("DeleteMusicToCategory", "HomeAdmin", new {idCT = item.idCT })">
+                        <i class="fa-solid fa-trash" id="1" style=" position: absolute; right: 15px; top: 15px; font-size: 16px; color: red;"></i>
+                      
+                    </a>
+                </li>
+                dem++;
+            }
+
+        }
+    }
+</div>
+
+
+

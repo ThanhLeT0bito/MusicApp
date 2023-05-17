@@ -1,0 +1,27 @@
+﻿@model ProjectHQTCSDL.Models.TacGia
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TacGia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tenTacGia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenTacGia)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idTacGia }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

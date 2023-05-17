@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ProjectHQTCSDL.Models.Music>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tenBaiHat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.urlBaiHat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.thongTinBaiHat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imgMusic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CaSi.tenCaSi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lyric.loiBaihat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TacGia.tenTacGia)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tenBaiHat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.urlBaiHat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.thongTinBaiHat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imgMusic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CaSi.tenCaSi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lyric.loiBaihat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TacGia.tenTacGia)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idMusic }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idMusic }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idMusic })
+        </td>
+    </tr>
+}
+
+</table>
