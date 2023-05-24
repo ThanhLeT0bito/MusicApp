@@ -9,6 +9,10 @@
     <title>Music App</title>
     <script src="https://kit.fontawesome.com/c0b1a641d5.js" crossorigin="anonymous"></script>
     <style>
+        body {
+            background-color: #131312 !important;
+            overflow: hidden;
+        }
         .song_side::-webkit-scrollbar {
             width: 5px;
             background-color: #F5F5F5;
@@ -17,7 +21,7 @@
             background-color: aqua;
         }
         audio{
-            height: 40px;
+            height: 20px;
         }
 
     </style>
@@ -113,8 +117,9 @@
                     @*<i class="bi bi-search"></i>
                     <input type="text" placeholder="Search Music...">*@
                 </div>
-                <div class="user">
-                    <img src="~/img/KDS CODER.png" alt="User" title="KDS CODER (Jahid Khan)">
+                <div class="user" style="display:flex; width: auto;">
+                    <img src="~/img/KDS CODER.png" alt="User" title="KDS CODER (Jahid Khan)" style="position: relative;">
+                    <a href="@Url.Action("SignIn", "Home")" style="color:white;text-decoration:none; font-size: 12px; border: 1px solid white;padding: 0 5px; padding-top: 5px; margin-left: 10px;"> Đăng Nhập</a>
                 </div>
             </nav>
 
@@ -129,12 +134,12 @@
             <div class="wave1"></div>
         </div>
         @{
-           
+
             var getBaiHat = Session["BaiHat"] as ProjectHQTCSDL.Models.Music;
             var getSingerMaster = new List<ProjectHQTCSDL.Models.CaSi>();
             if (getBaiHat != null)
             {
-                getSingerMaster =  db.CaSis.Where(x => x.idCaSi == getBaiHat.idCaSi).ToList();
+                getSingerMaster = db.CaSis.Where(x => x.idCaSi == getBaiHat.idCaSi).ToList();
                 if (getSingerMaster != null && getSingerMaster.Count > 0)
                 {
                     ViewBag.getSingerMaster = getSingerMaster[0];
@@ -151,26 +156,26 @@
             <img src="~/img/26th.jpg" alt="Alan" id="poster_master_play">
 
         }
-    <h5 id="title">
+        <h5 id="title">
 
-        @if (getBaiHat != null)
-        {
-            <div style="margin-bottom: -15px;">@getBaiHat.tenBaiHat</div>
-        }
-        else
-        {
-            <div>Hello</div>
-        }
-        <br>
-        @if (ViewBag.getSingerMaster != null)
-        {
-            <div  style="margin-top: 10px;" class="subtitle">@ViewBag.getSingerMaster.tenCaSi</div>
-        }
-        else
-        {
-            <div class="subtitle">Bankim Chandra</div>
-        }
-    </h5>
+            @if (getBaiHat != null)
+            {
+                <div style="margin-bottom: -15px;">@getBaiHat.tenBaiHat</div>
+            }
+            else
+            {
+                <div>Hello</div>
+            }
+            <br>
+            @if (ViewBag.getSingerMaster != null)
+            {
+                <div style="margin-top: 10px;" class="subtitle">@ViewBag.getSingerMaster.tenCaSi</div>
+            }
+            else
+            {
+                <div class="subtitle">Bankim Chandra</div>
+            }
+        </h5>
         <div class="icon" style="display: flex; align-items: center;">
             <i class="bi bi-skip-start-fill" id="back"></i>
             <i class="bi @*bi-play-fill*@" id="masterPlay">
@@ -186,6 +191,28 @@
             </i>
             <i class="bi bi-skip-end-fill" id="next"></i>
         </div>
+        @if (Session["BaiHat"] != null)
+        {
+            //var getSong = Session["BaiHat"] as ProjectHQTCSDL.Models.Music;
+    <div>
+
+
+        <a href="@Url.Action("ShowComment", "Home", new {idMusic = getBaiHat.idMusic })" style="color:aqua">
+
+
+            <i style="font-size: 17px;" class="fa-solid fa-comments"></i>
+        </a>
+        @if (getBaiHat.idLyric != null)
+        {
+            <a href="@Url.Action("ShowLyric", "Home", new { idLyric = getBaiHat.idLyric})" style="margin-left: 20px; color: aqua; cursor: pointer;">
+                <i style="font-size: 17px;" class="fa-solid fa-music"></i>
+            </a>
+        }
+
+
+    </div>
+        }
+
     </div>
     </header>
     <script src="app.js"></script>

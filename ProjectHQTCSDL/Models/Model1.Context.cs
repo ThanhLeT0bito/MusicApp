@@ -341,5 +341,69 @@ namespace ProjectHQTCSDL.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateMusic", idMusicParameter, idCaSiParameter, idTacGiaParameter, idLyricParameter, tenBaiHatParameter, urlBaiHatParameter, thongTinBaiHatParameter);
         }
+    
+        [DbFunction("ProjectMusicEntities", "FUNC_LayDSTheoCategory")]
+        public virtual IQueryable<FUNC_LayDSTheoCategory_Result> FUNC_LayDSTheoCategory(Nullable<int> idCategory)
+        {
+            var idCategoryParameter = idCategory.HasValue ?
+                new ObjectParameter("idCategory", idCategory) :
+                new ObjectParameter("idCategory", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<FUNC_LayDSTheoCategory_Result>("[ProjectMusicEntities].[FUNC_LayDSTheoCategory](@idCategory)", idCategoryParameter);
+        }
+    
+        [DbFunction("ProjectMusicEntities", "FUNC_LayDSTheoidPlaylist")]
+        public virtual IQueryable<FUNC_LayDSTheoidPlaylist_Result> FUNC_LayDSTheoidPlaylist(Nullable<int> idPlaylist)
+        {
+            var idPlaylistParameter = idPlaylist.HasValue ?
+                new ObjectParameter("idPlaylist", idPlaylist) :
+                new ObjectParameter("idPlaylist", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<FUNC_LayDSTheoidPlaylist_Result>("[ProjectMusicEntities].[FUNC_LayDSTheoidPlaylist](@idPlaylist)", idPlaylistParameter);
+        }
+    
+        public virtual int sp_AddCategory(string nameCategory, Nullable<System.DateTime> ngayTao)
+        {
+            var nameCategoryParameter = nameCategory != null ?
+                new ObjectParameter("nameCategory", nameCategory) :
+                new ObjectParameter("nameCategory", typeof(string));
+    
+            var ngayTaoParameter = ngayTao.HasValue ?
+                new ObjectParameter("ngayTao", ngayTao) :
+                new ObjectParameter("ngayTao", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_AddCategory", nameCategoryParameter, ngayTaoParameter);
+        }
+    
+        public virtual int sp_AddMusicToCategory(Nullable<int> idCategory, Nullable<int> idMusic)
+        {
+            var idCategoryParameter = idCategory.HasValue ?
+                new ObjectParameter("idCategory", idCategory) :
+                new ObjectParameter("idCategory", typeof(int));
+    
+            var idMusicParameter = idMusic.HasValue ?
+                new ObjectParameter("idMusic", idMusic) :
+                new ObjectParameter("idMusic", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_AddMusicToCategory", idCategoryParameter, idMusicParameter);
+        }
+    
+        public virtual int sp_DeleteCategory(Nullable<int> idCategory)
+        {
+            var idCategoryParameter = idCategory.HasValue ?
+                new ObjectParameter("idCategory", idCategory) :
+                new ObjectParameter("idCategory", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteCategory", idCategoryParameter);
+        }
+    
+        public virtual int sp_DeleteMusicfromCategory(Nullable<int> idCategory)
+        {
+            var idCategoryParameter = idCategory.HasValue ?
+                new ObjectParameter("idCategory", idCategory) :
+                new ObjectParameter("idCategory", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteMusicfromCategory", idCategoryParameter);
+        }
     }
 }

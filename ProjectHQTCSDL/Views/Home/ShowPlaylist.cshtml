@@ -34,10 +34,13 @@
                     <img src="~/Images/@getMusic.imgMusic" alt="Alan" style="width: 32px; height: 32px; margin-left: 25px; object-fit:cover;">
                     <h5 style="font-size: 11px; margin-left: 15px;">
                         @getMusic.tenBaiHat
-                        <div class="subtitle" style=" font-size: 9px; color: #4c5262;">@getSinger.tenCaSi</div>
+                        <div class="subtitle" style=" font-size: 9px; color: aqua;">@getSinger.tenCaSi</div>
                     </h5>
                     <a href="@Url.Action("ChangeMusic", "Home", new {idMusic = item.idMusic})">
                         <i class="bi playListPlay bi-play-circle-fill" id="1" style=" position: absolute; right: 15px; top: 6px; font-size: 16px;"></i>
+                    </a>
+                    <a href="@Url.Action("DeleteMusicFromPlaylist", "Home", new {idPI = item.idPI })" >
+                        <i class="fa-solid fa-trash" id="1" style=" position: absolute; right: 50px; top: 11px; font-size: 16px; color: red;"></i>
                     </a>
                 </li>
                 dem++;

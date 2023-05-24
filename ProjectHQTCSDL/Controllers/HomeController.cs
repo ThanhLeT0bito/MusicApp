@@ -15,6 +15,15 @@ namespace ProjectHQTCSDL.Controllers
 
         ProjectMusicEntities db = new ProjectMusicEntities();
 
+        public ActionResult SignIn()
+        {
+            return View();
+        }
+        public ActionResult SignUp()
+        {
+            return View();
+        }
+
         public ActionResult Index()
         {
             var getLstSong = db.Musics.ToList();
@@ -37,20 +46,26 @@ namespace ProjectHQTCSDL.Controllers
                 ViewBag.MessageSeach = "Vui lòng nhập từ khóa tìm kiếm.";
                 ViewBag.inputSearch = search;
                 var songs1 = db.Musics.ToList();
-
                 return View(songs1);
             }
             ViewBag.inputSearch = search;
+
             //var searchResults = db.Database.SqlQuery<Music>("SELECT * FROM dbo.TimKiemNhac(@TuKhoa)", new SqlParameter("@TuKhoa", keyword)).ToList();
+            var tempSearch = db.TimKiemNhac(tuKhoa: search).ToList() ;
+            var query = $"SELECT * FROM dbo.TimKiemNhac(@TuKhoa)";
+            var parameter = new SqlParameter("@TuKhoa", search);
+
+            var result = db.Database.SqlQuery<Music>(query, parameter).ToList();
+
             var songs = db.Musics
                 .Where(p => p.tenBaiHat.Contains(search))
                 .ToList();
 
             if (songs.Count == 0)
             {
-                ViewBag.MessageSearch = "Shop hiện nay không có sản phẩm này.";
+                ViewBag.MessageSearch = "hiện nay không có sản phẩm này.";
             }
-            return View(songs);
+            return View(result);
         }
 
         //temponary
@@ -96,10 +111,11 @@ namespace ProjectHQTCSDL.Controllers
             //int idCategory
             var getCategoryItem = db.Category_Item.Where(x => x.idCategory == idCategory).ToList();
             var getcategory = db.Categories.FirstOrDefault(x => x.idCategory == idCategory);
+            var getCategory_Items= db.Database.SqlQuery<Category_Item>("SELECT * FROM dbo.FUNC_LayDSTheoCategory(@TuKhoa)", new SqlParameter("@TuKhoa", idCategory)).ToList();
             if (getcategory != null)
                 ViewBag.nameCategory = getcategory.nameCategory;
             ViewBag.sl = getCategoryItem.Count;
-            return View(getCategoryItem);
+            return View(getCategory_Items);
         }
 
         public ActionResult OpenMusicFromSinger(int idCaSi)
@@ -162,6 +178,7 @@ namespace ProjectHQTCSDL.Controllers
             if (getPlaylist != null)
                 ViewBag.namePlaylist = getPlaylist.tenPlaylist;
             ViewBag.sl = getPlaylistItem.Count;
+            Session["PLaylist"] = getPlaylist;
             return View(getPlaylistItem);
         }
         //selected Playlist
@@ -193,6 +210,50 @@ namespace ProjectHQTCSDL.Controllers
             }
             return RedirectToAction("ShowPlaylist", "Home", new {idPLaylist = getPlaylist.idPlaylist });
         }
+        public ActionResult DeleteMusicFromPlaylist(int idPI)
+        {
+            var getPlaylist = Session["PLaylist"] as Playlist;
+            var getPlayListItem = db.Playlist_Item.FirstOrDefault(x => x.idPI == idPI);
+            if (getPlayListItem != null)
+            {
+                db.Playlist_Item.Remove(getPlayListItem);
+                db.SaveChanges();
+            }
+            return RedirectToAction("ShowPlaylist", "Home", new { idPLaylist = getPlaylist.idPlaylist });
+        }
 
+        //comment
+        public ActionResult ShowComment(int idMusic)
+        {
+            var getComment = db.Comments.Where(x => x.idMusic == idMusic).ToList();
+            ViewBag.sl = getComment.Count;
+            return View(getComment);
+        }
+        public ActionResult AddComment(string inputValue)
+        {
+            var getMusic = Session["BaiHat"] as Music;
+            if (inputValue != null && inputValue != "")
+            {
+                var getUser = Session["User"] as UserMain;
+                if (getUser != null && getMusic != null)
+                {
+                    Comment newComment = new Comment()
+                    {
+                        idUser = getUser.idUser,
+                        idMusic = getMusic.idMusic,
+                        commentContent = inputValue,
+                    };
+                    db.Comments.Add(newComment);
+                    db.SaveChanges();
+                }
+            }
+            
+            return RedirectToAction("ShowComment", "Home", new { idMusic = getMusic.idMusic });
+        }
+        public ActionResult ShowLyric(int idLyric)
+        {
+            var getComment = db.Lyrics.FirstOrDefault(x => x.idLyric == idLyric);
+            return View(getComment);
+        }
     }
 }

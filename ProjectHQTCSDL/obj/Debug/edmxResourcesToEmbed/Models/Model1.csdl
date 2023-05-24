@@ -496,6 +496,26 @@
       <Parameter Name="urlBaiHat" Mode="In" Type="String" />
       <Parameter Name="thongTinBaiHat" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="FUNC_LayDSTheoCategory" IsComposable="true" ReturnType="Collection(ProjectMusicModel.FUNC_LayDSTheoCategory_Result)">
+      <Parameter Name="idCategory" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="FUNC_LayDSTheoidPlaylist" IsComposable="true" ReturnType="Collection(ProjectMusicModel.FUNC_LayDSTheoidPlaylist_Result)">
+      <Parameter Name="idPlaylist" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddCategory">
+      <Parameter Name="nameCategory" Mode="In" Type="String" />
+      <Parameter Name="ngayTao" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AddMusicToCategory">
+      <Parameter Name="idCategory" Mode="In" Type="Int32" />
+      <Parameter Name="idMusic" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteCategory">
+      <Parameter Name="idCategory" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteMusicfromCategory">
+      <Parameter Name="idCategory" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="find_song_by_category_Result">
     <Property Type="Int32" Name="idCategory" Nullable="false" />
@@ -517,5 +537,15 @@
     <Property Type="Int32" Name="ID" Nullable="false" />
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="FUNC_LayDSTheoCategory_Result">
+    <Property Type="Int32" Name="idCT" Nullable="false" />
+    <Property Type="Int32" Name="idCategory" Nullable="true" />
+    <Property Type="Int32" Name="idMusic" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="FUNC_LayDSTheoidPlaylist_Result">
+    <Property Type="Int32" Name="idPI" Nullable="false" />
+    <Property Type="Int32" Name="idPlaylist" Nullable="true" />
+    <Property Type="Int32" Name="idMusic" Nullable="true" />
   </ComplexType>
 </Schema>

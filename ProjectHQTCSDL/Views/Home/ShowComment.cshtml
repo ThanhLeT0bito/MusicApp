@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ProjectHQTCSDL.Models.Comment>
+@{
+    ViewBag.Title = "ShowComment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <style>
+        header .song_side::before {
+            content: '';
+            height: 300px;
+            background: none;
+        }
+    </style>
+    ProjectHQTCSDL.Models.ProjectMusicEntities db = new ProjectHQTCSDL.Models.ProjectMusicEntities();
+    var getBaiHat = Session["BaiHat"] as ProjectHQTCSDL.Models.Music;
+    var getSinger = db.CaSis.FirstOrDefault(x => x.idCaSi == getBaiHat.idCaSi);
+
+}
+
+<div style="display: flex;">
+
+    <div style="margin-left: 50px; width: 200px; height: 250px;">
+        <img src="~/Images/@getBaiHat.imgMusic" style="height:100%; width: 100%; object-fit:cover; border:2px solid aqua; " />
+    </div>
+    <div style="margin-left: 50px; margin-top: 20px; font-size: 20px;">
+        <strong style="font-size: 30px; color: aqua;">
+            @getBaiHat.tenBaiHat
+        </strong>
+        <p>@getSinger.tenCaSi</p>
+        @if (Session["User"] != null)
+        {
+            <p style="margin-top: 60px; margin-bottom: 10px;">New Comment</p>
+            using (Html.BeginForm("AddComment", "Home", FormMethod.Post))
+            {
+                <div style="display:flex;">
+
+                    <div style="margin-right: 20px;">
+                        <input type="text" id="inputValue" name="inputValue" placeholder="Input Name Comment" style="border: none; padding: 5px; border-radius: 5px; width: 300px; height:50px;" />
+                    </div>
+                    <button type="submit" style="background-color: black; border: 3px solid aqua; color: aqua; padding: 5px;">Add</button>
+                </div>
+            }
+        }
+        else
+            {
+                <p style="margin-top: 60px; margin-bottom: 10px;">Bạn cần phải Đăng Nhập mới có thể thêm Bình Luân</p>
+            }
+    </div>
+</div>
+
+<div style="padding: 20px;">
+    <div class="container" style="height: 50px; width: 100%; display: flex; justify-content:center; align-items:center; border: 1px solid aqua; margin-right: 20px; border-radius: 10px; margin-bottom: 10px;">
+        <strong style="font-size: 30px; color: #36e2ec;"> @ViewBag.sl Bình Luận </strong>
+    </div>
+    @foreach(var item in Model)
+            {
+                <div style="display: flex; margin-top: 10px;">
+                    <div style="margin-right: 20px;">
+                        <img src="~/Images/Adele.png" style="width:50px; height:50px;  border-radius:50%; object-fit:cover;"/>
+                    </div>
+                    <div>
+                        <p style="font-size:13px; margin-bottom: 5px;">Lê Tiến Thành</p>
+                        <p>@item.commentContent</p>
+                    </div>
+                </div>
+            }
+</div>

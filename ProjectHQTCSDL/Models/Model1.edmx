@@ -325,6 +325,34 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
           <Parameter Name="singer_name" Type="varchar" Mode="In" />
         </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="FUNC_LayDSTheoCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCategory" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="idCT" Type="int" Nullable="false" />
+                <Property Name="idCategory" Type="int" />
+                <Property Name="idMusic" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="FUNC_LayDSTheoidPlaylist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idPlaylist" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="idPI" Type="int" Nullable="false" />
+                <Property Name="idPlaylist" Type="int" />
+                <Property Name="idMusic" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="sp_AddCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nameCategory" Type="nvarchar" Mode="In" />
+          <Parameter Name="ngayTao" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="sp_AddMusic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idCaSi" Type="int" Mode="In" />
           <Parameter Name="idTacGia" Type="int" Mode="In" />
@@ -332,6 +360,10 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
           <Parameter Name="tenBaiHat" Type="nvarchar" Mode="In" />
           <Parameter Name="urlBaiHat" Type="varchar" Mode="In" />
           <Parameter Name="thongTinBaiHat" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_AddMusicToCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCategory" Type="int" Mode="In" />
+          <Parameter Name="idMusic" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -344,6 +376,12 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
           <Parameter Name="owner_id" Type="int" Mode="In" />
           <Parameter Name="version" Type="int" Mode="In" />
           <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCategory" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteMusicfromCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCategory" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_deletePlaylist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idPlaylist" Type="int" Mode="In" />
@@ -398,6 +436,7 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
                 <Property Name="tenBaiHat" Type="nvarchar" MaxLength="50" Nullable="false" />
                 <Property Name="urlBaiHat" Type="varchar" MaxLength="50" />
                 <Property Name="thongTinBaiHat" Type="nvarchar" MaxLength="100" />
+                <Property Name="imgMusic" Type="varchar" MaxLength="100" />
               </RowType>
             </CollectionType>
           </ReturnType>
@@ -1043,6 +1082,26 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
             <Parameter Name="urlBaiHat" Mode="In" Type="String" />
             <Parameter Name="thongTinBaiHat" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="FUNC_LayDSTheoCategory" IsComposable="true" ReturnType="Collection(ProjectMusicModel.FUNC_LayDSTheoCategory_Result)">
+          <Parameter Name="idCategory" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FUNC_LayDSTheoidPlaylist" IsComposable="true" ReturnType="Collection(ProjectMusicModel.FUNC_LayDSTheoidPlaylist_Result)">
+          <Parameter Name="idPlaylist" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_AddCategory">
+            <Parameter Name="nameCategory" Mode="In" Type="String" />
+            <Parameter Name="ngayTao" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_AddMusicToCategory">
+            <Parameter Name="idCategory" Mode="In" Type="Int32" />
+            <Parameter Name="idMusic" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteCategory">
+          <Parameter Name="idCategory" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteMusicfromCategory">
+          <Parameter Name="idCategory" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="find_song_by_category_Result">
           <Property Type="Int32" Name="idCategory" Nullable="false" />
@@ -1064,6 +1123,16 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="FUNC_LayDSTheoCategory_Result">
+          <Property Type="Int32" Name="idCT" Nullable="false" />
+          <Property Type="Int32" Name="idCategory" Nullable="true" />
+          <Property Type="Int32" Name="idMusic" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="FUNC_LayDSTheoidPlaylist_Result">
+          <Property Type="Int32" Name="idPI" Nullable="false" />
+          <Property Type="Int32" Name="idPlaylist" Nullable="true" />
+          <Property Type="Int32" Name="idMusic" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1340,6 +1409,28 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
           <FunctionImportMapping FunctionImportName="sp_ThemTacGia" FunctionName="ProjectMusicModel.Store.sp_ThemTacGia" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ProjectMusicModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="UpdateMusic" FunctionName="ProjectMusicModel.Store.UpdateMusic" />
+          <FunctionImportMapping FunctionImportName="FUNC_LayDSTheoCategory" FunctionName="ProjectMusicModel.Store.FUNC_LayDSTheoCategory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjectMusicModel.FUNC_LayDSTheoCategory_Result">
+                <ScalarProperty Name="idCT" ColumnName="idCT" />
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="idMusic" ColumnName="idMusic" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="FUNC_LayDSTheoidPlaylist" FunctionName="ProjectMusicModel.Store.FUNC_LayDSTheoidPlaylist">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjectMusicModel.FUNC_LayDSTheoidPlaylist_Result">
+                <ScalarProperty Name="idPI" ColumnName="idPI" />
+                <ScalarProperty Name="idPlaylist" ColumnName="idPlaylist" />
+                <ScalarProperty Name="idMusic" ColumnName="idMusic" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_AddCategory" FunctionName="ProjectMusicModel.Store.sp_AddCategory" />
+          <FunctionImportMapping FunctionImportName="sp_AddMusicToCategory" FunctionName="ProjectMusicModel.Store.sp_AddMusicToCategory" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteCategory" FunctionName="ProjectMusicModel.Store.sp_DeleteCategory" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteMusicfromCategory" FunctionName="ProjectMusicModel.Store.sp_DeleteMusicfromCategory" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

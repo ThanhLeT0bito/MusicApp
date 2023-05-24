@@ -320,6 +320,34 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
     <Parameter Name="singer_name" Type="varchar" Mode="In" />
   </Function>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="FUNC_LayDSTheoCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idCategory" Type="int" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="idCT" Type="int" Nullable="false" />
+          <Property Name="idCategory" Type="int" />
+          <Property Name="idMusic" Type="int" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="FUNC_LayDSTheoidPlaylist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idPlaylist" Type="int" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="idPI" Type="int" Nullable="false" />
+          <Property Name="idPlaylist" Type="int" />
+          <Property Name="idMusic" Type="int" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="sp_AddCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nameCategory" Type="nvarchar" Mode="In" />
+    <Parameter Name="ngayTao" Type="datetime" Mode="In" />
+  </Function>
   <Function Name="sp_AddMusic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idCaSi" Type="int" Mode="In" />
     <Parameter Name="idTacGia" Type="int" Mode="In" />
@@ -327,6 +355,10 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
     <Parameter Name="tenBaiHat" Type="nvarchar" Mode="In" />
     <Parameter Name="urlBaiHat" Type="varchar" Mode="In" />
     <Parameter Name="thongTinBaiHat" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_AddMusicToCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idCategory" Type="int" Mode="In" />
+    <Parameter Name="idMusic" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -339,6 +371,12 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
     <Parameter Name="owner_id" Type="int" Mode="In" />
     <Parameter Name="version" Type="int" Mode="In" />
     <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_DeleteCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idCategory" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_DeleteMusicfromCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idCategory" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_deletePlaylist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idPlaylist" Type="int" Mode="In" />
@@ -393,6 +431,7 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
           <Property Name="tenBaiHat" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="urlBaiHat" Type="varchar" MaxLength="50" />
           <Property Name="thongTinBaiHat" Type="nvarchar" MaxLength="100" />
+          <Property Name="imgMusic" Type="varchar" MaxLength="100" />
         </RowType>
       </CollectionType>
     </ReturnType>
