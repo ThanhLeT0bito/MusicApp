@@ -261,8 +261,12 @@ namespace ProjectHQTCSDL.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ThemBaiHatVaoPlaylist", idPlaylistParameter, idMusicParameter);
         }
     
-        public virtual int sp_ThemCaSi(string tenCaSi, string imgCaSi)
+        public virtual int sp_ThemCaSi(Nullable<int> idCaSi, string tenCaSi, string imgCaSi)
         {
+            var idCaSiParameter = idCaSi.HasValue ?
+                new ObjectParameter("idCaSi", idCaSi) :
+                new ObjectParameter("idCaSi", typeof(int));
+    
             var tenCaSiParameter = tenCaSi != null ?
                 new ObjectParameter("tenCaSi", tenCaSi) :
                 new ObjectParameter("tenCaSi", typeof(string));
@@ -271,7 +275,7 @@ namespace ProjectHQTCSDL.Models
                 new ObjectParameter("imgCaSi", imgCaSi) :
                 new ObjectParameter("imgCaSi", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ThemCaSi", tenCaSiParameter, imgCaSiParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ThemCaSi", idCaSiParameter, tenCaSiParameter, imgCaSiParameter);
         }
     
         public virtual int sp_ThemPlaylist(Nullable<int> idUser, string tenPlaylist, Nullable<System.DateTime> ngayTao)
@@ -404,6 +408,16 @@ namespace ProjectHQTCSDL.Models
                 new ObjectParameter("idCategory", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteMusicfromCategory", idCategoryParameter);
+        }
+    
+        [DbFunction("ProjectMusicEntities", "FUNC_LayDSBHTheoCaSi")]
+        public virtual IQueryable<FUNC_LayDSBHTheoCaSi_Result> FUNC_LayDSBHTheoCaSi(Nullable<int> idCaSi)
+        {
+            var idCaSiParameter = idCaSi.HasValue ?
+                new ObjectParameter("idCaSi", idCaSi) :
+                new ObjectParameter("idCaSi", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<FUNC_LayDSBHTheoCaSi_Result>("[ProjectMusicEntities].[FUNC_LayDSBHTheoCaSi](@idCaSi)", idCaSiParameter);
         }
     }
 }

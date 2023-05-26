@@ -122,6 +122,7 @@
     <EntitySetMapping Name="UserMains">
       <EntityTypeMapping TypeName="ProjectMusicModel.UserMain">
         <MappingFragment StoreEntitySet="UserMain">
+          <ScalarProperty Name="nameUser" ColumnName="nameUser" />
           <ScalarProperty Name="idUser" ColumnName="idUser" />
           <ScalarProperty Name="tenDangNhap" ColumnName="tenDangNhap" />
           <ScalarProperty Name="matKhau" ColumnName="matKhau" />
@@ -292,5 +293,19 @@
     <FunctionImportMapping FunctionImportName="sp_AddMusicToCategory" FunctionName="ProjectMusicModel.Store.sp_AddMusicToCategory" />
     <FunctionImportMapping FunctionImportName="sp_DeleteCategory" FunctionName="ProjectMusicModel.Store.sp_DeleteCategory" />
     <FunctionImportMapping FunctionImportName="sp_DeleteMusicfromCategory" FunctionName="ProjectMusicModel.Store.sp_DeleteMusicfromCategory" />
+    <FunctionImportMapping FunctionImportName="FUNC_LayDSBHTheoCaSi" FunctionName="ProjectMusicModel.Store.FUNC_LayDSBHTheoCaSi">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjectMusicModel.FUNC_LayDSBHTheoCaSi_Result">
+          <ScalarProperty Name="idMusic" ColumnName="idMusic" />
+          <ScalarProperty Name="idCaSi" ColumnName="idCaSi" />
+          <ScalarProperty Name="idtacGia" ColumnName="idtacGia" />
+          <ScalarProperty Name="idLyric" ColumnName="idLyric" />
+          <ScalarProperty Name="tenBaiHat" ColumnName="tenBaiHat" />
+          <ScalarProperty Name="urlBaiHat" ColumnName="urlBaiHat" />
+          <ScalarProperty Name="thongTinBaiHat" ColumnName="thongTinBaiHat" />
+          <ScalarProperty Name="imgMusic" ColumnName="imgMusic" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

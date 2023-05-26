@@ -46,11 +46,16 @@ namespace ProjectHQTCSDL.Controllers.ADMIN
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idCaSi,tenCaSi,imgCaSi")] CaSi caSi)
+        public ActionResult Create([Bind(Include = "tenCaSi,imgCaSi")] CaSi caSi)
         {
+            int searchID = 0;
+            var getCaSi = db.CaSis.ToList();
+            searchID = getCaSi.Max(x => x.idCaSi) + 1;
+
             if (ModelState.IsValid)
             {
-                db.CaSis.Add(caSi);
+                //db.CaSis.Add(caSi);
+                db.sp_ThemCaSi(searchID, caSi.tenCaSi, caSi.imgCaSi);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

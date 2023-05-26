@@ -114,6 +114,7 @@
     <Property Name="tenDangNhap" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="matKhau" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="isAdmin" Type="bit" />
+    <Property Name="nameUser" Type="nvarchar" MaxLength="60" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'ProjectMusic.dbo.view_getSongFromAdeleSinger' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -320,6 +321,23 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
     <Parameter Name="singer_name" Type="varchar" Mode="In" />
   </Function>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="FUNC_LayDSBHTheoCaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idCaSi" Type="int" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="idMusic" Type="int" Nullable="false" />
+          <Property Name="idCaSi" Type="int" />
+          <Property Name="idtacGia" Type="int" />
+          <Property Name="idLyric" Type="int" />
+          <Property Name="tenBaiHat" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="urlBaiHat" Type="varchar" MaxLength="50" />
+          <Property Name="thongTinBaiHat" Type="nvarchar" MaxLength="100" />
+          <Property Name="imgMusic" Type="varchar" MaxLength="100" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
   <Function Name="FUNC_LayDSTheoCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idCategory" Type="int" Mode="In" />
     <ReturnType>
@@ -406,6 +424,7 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
     <Parameter Name="idMusic" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_ThemCaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idCaSi" Type="int" Mode="In" />
     <Parameter Name="tenCaSi" Type="nvarchar" Mode="In" />
     <Parameter Name="imgCaSi" Type="varchar" Mode="In" />
   </Function>

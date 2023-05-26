@@ -119,6 +119,7 @@
           <Property Name="tenDangNhap" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="matKhau" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="isAdmin" Type="bit" />
+          <Property Name="nameUser" Type="nvarchar" MaxLength="60" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ProjectMusic.dbo.view_getSongFromAdeleSinger' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -325,6 +326,23 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
           <Parameter Name="singer_name" Type="varchar" Mode="In" />
         </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="FUNC_LayDSBHTheoCaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCaSi" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="idMusic" Type="int" Nullable="false" />
+                <Property Name="idCaSi" Type="int" />
+                <Property Name="idtacGia" Type="int" />
+                <Property Name="idLyric" Type="int" />
+                <Property Name="tenBaiHat" Type="nvarchar" MaxLength="50" Nullable="false" />
+                <Property Name="urlBaiHat" Type="varchar" MaxLength="50" />
+                <Property Name="thongTinBaiHat" Type="nvarchar" MaxLength="100" />
+                <Property Name="imgMusic" Type="varchar" MaxLength="100" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="FUNC_LayDSTheoCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idCategory" Type="int" Mode="In" />
           <ReturnType>
@@ -411,6 +429,7 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
           <Parameter Name="idMusic" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_ThemCaSi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCaSi" Type="int" Mode="In" />
           <Parameter Name="tenCaSi" Type="nvarchar" Mode="In" />
           <Parameter Name="imgCaSi" Type="varchar" Mode="In" />
         </Function>
@@ -745,6 +764,7 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
           <NavigationProperty Name="Comments" Relationship="Self.FK__Comment__idUser__619B8048" FromRole="UserMain" ToRole="Comment" />
           <NavigationProperty Name="Playlists" Relationship="Self.FK__Playlist__idUser__7C4F7684" FromRole="UserMain" ToRole="Playlist" />
           <NavigationProperty Name="Profiles" Relationship="Self.FK__Profile__idUser__3A81B327" FromRole="UserMain" ToRole="Profile" />
+          <Property Name="nameUser" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="view_getSongFromAdeleSinger">
           <Key>
@@ -1060,6 +1080,7 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
             <Parameter Name="idMusic" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_ThemCaSi">
+            <Parameter Name="idCaSi" Mode="In" Type="Int32" />
             <Parameter Name="tenCaSi" Mode="In" Type="String" />
             <Parameter Name="imgCaSi" Mode="In" Type="String" />
           </FunctionImport>
@@ -1102,6 +1123,9 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
           <FunctionImport Name="sp_DeleteMusicfromCategory">
           <Parameter Name="idCategory" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="FUNC_LayDSBHTheoCaSi" IsComposable="true" ReturnType="Collection(ProjectMusicModel.FUNC_LayDSBHTheoCaSi_Result)">
+          <Parameter Name="idCaSi" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="find_song_by_category_Result">
           <Property Type="Int32" Name="idCategory" Nullable="false" />
@@ -1133,6 +1157,16 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
           <Property Type="Int32" Name="idPI" Nullable="false" />
           <Property Type="Int32" Name="idPlaylist" Nullable="true" />
           <Property Type="Int32" Name="idMusic" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="FUNC_LayDSBHTheoCaSi_Result">
+          <Property Type="Int32" Name="idMusic" Nullable="false" />
+          <Property Type="Int32" Name="idCaSi" Nullable="true" />
+          <Property Type="Int32" Name="idtacGia" Nullable="true" />
+          <Property Type="Int32" Name="idLyric" Nullable="true" />
+          <Property Type="String" Name="tenBaiHat" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="urlBaiHat" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="thongTinBaiHat" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="imgMusic" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1261,6 +1295,7 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
           <EntitySetMapping Name="UserMains">
             <EntityTypeMapping TypeName="ProjectMusicModel.UserMain">
               <MappingFragment StoreEntitySet="UserMain">
+                <ScalarProperty Name="nameUser" ColumnName="nameUser" />
                 <ScalarProperty Name="idUser" ColumnName="idUser" />
                 <ScalarProperty Name="tenDangNhap" ColumnName="tenDangNhap" />
                 <ScalarProperty Name="matKhau" ColumnName="matKhau" />
@@ -1431,6 +1466,20 @@ warning 6002: The table/view 'ProjectMusic.dbo.view_tacGiaAll' does not have a p
           <FunctionImportMapping FunctionImportName="sp_AddMusicToCategory" FunctionName="ProjectMusicModel.Store.sp_AddMusicToCategory" />
           <FunctionImportMapping FunctionImportName="sp_DeleteCategory" FunctionName="ProjectMusicModel.Store.sp_DeleteCategory" />
           <FunctionImportMapping FunctionImportName="sp_DeleteMusicfromCategory" FunctionName="ProjectMusicModel.Store.sp_DeleteMusicfromCategory" />
+          <FunctionImportMapping FunctionImportName="FUNC_LayDSBHTheoCaSi" FunctionName="ProjectMusicModel.Store.FUNC_LayDSBHTheoCaSi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjectMusicModel.FUNC_LayDSBHTheoCaSi_Result">
+                <ScalarProperty Name="idMusic" ColumnName="idMusic" />
+                <ScalarProperty Name="idCaSi" ColumnName="idCaSi" />
+                <ScalarProperty Name="idtacGia" ColumnName="idtacGia" />
+                <ScalarProperty Name="idLyric" ColumnName="idLyric" />
+                <ScalarProperty Name="tenBaiHat" ColumnName="tenBaiHat" />
+                <ScalarProperty Name="urlBaiHat" ColumnName="urlBaiHat" />
+                <ScalarProperty Name="thongTinBaiHat" ColumnName="thongTinBaiHat" />
+                <ScalarProperty Name="imgMusic" ColumnName="imgMusic" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -26,6 +26,7 @@ namespace ProjectHQTCSDL.Models
         public string tenDangNhap { get; set; }
         public string matKhau { get; set; }
         public Nullable<bool> isAdmin { get; set; }
+        public string nameUser { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }

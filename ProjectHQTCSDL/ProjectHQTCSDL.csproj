@@ -139,6 +139,9 @@
     <Compile Include="Models\find_song_by_Singer_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FUNC_LayDSBHTheoCaSi_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\FUNC_LayDSTheoCategory_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

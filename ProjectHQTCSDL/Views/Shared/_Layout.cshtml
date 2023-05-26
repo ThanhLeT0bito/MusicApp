@@ -119,7 +119,19 @@
                 </div>
                 <div class="user" style="display:flex; width: auto;">
                     <img src="~/img/KDS CODER.png" alt="User" title="KDS CODER (Jahid Khan)" style="position: relative;">
-                    <a href="@Url.Action("SignIn", "Home")" style="color:white;text-decoration:none; font-size: 12px; border: 1px solid white;padding: 0 5px; padding-top: 5px; margin-left: 10px;"> Đăng Nhập</a>
+                    @{
+                        if (Session["User"] == null)
+                        {
+                            <a href="@Url.Action("SignIn", "Home")" style="color:white;text-decoration:none; font-size: 12px; border: 1px solid white;padding: 0 5px; padding-top: 5px; margin-left: 10px;"> Đăng Nhập</a>
+                            <a href="@Url.Action("SignUp", "Home")" style="color:white;text-decoration:none; font-size: 12px; border: 1px solid white;padding: 0 5px; padding-top: 5px; margin-left: 10px;"> Đăng Ký</a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("SignOut", "Home")" style="color:white;text-decoration:none; font-size: 12px; border: 1px solid white;padding: 0 5px; padding-top: 5px; margin-left: 10px;"> Đăng Xuất</a>
+
+                        }
+                    }
+
                 </div>
             </nav>
 

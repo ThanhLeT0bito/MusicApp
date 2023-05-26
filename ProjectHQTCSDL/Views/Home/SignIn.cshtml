@@ -1,15 +1,15 @@
 ﻿
 @{
     ViewBag.Title = "SignIn";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "";
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         body {
-            background-color:  #131312 !important;
+            /*background-color:  #131312 !important;*/
         }
     </style>
 }
-
+<h2 style="text-align:center; margin-top: 40px; margin-bottom: -50px;">ĐĂNG NHẬP</h2>
 <section class="vh-100">
     <div class="container py-5 h-100">
         <div class="row d-flex align-items-center justify-content-center h-100">
@@ -18,19 +18,24 @@
                      class="img-fluid" alt="Phone image">
             </div>
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                @using (Html.BeginForm("SignIn", "Home"))
+                {
                 <form>
+                    @Html.ValidationSummary(true)
                     <!-- Email input -->
                     <div class="form-outline mb-4">
-                        <input type="email" id="form1Example13" class="form-control form-control-lg" />
-                        <label class="form-label" for="form1Example13">Email address</label>
+                        @*<input type="email" id="form1Example13" class="form-control form-control-lg" />*@
+                        @Html.TextBox("tenDangNhap", null, new { @class = "input-field form-control form-control-lg", @id = "form1Example13", required = "required" })
+                        <label class="form-label" for="form1Example13">Tên Đăng Nhập</label>
                     </div>
 
                     <!-- Password input -->
                     <div class="form-outline mb-4">
-                        <input type="password" id="form1Example23" class="form-control form-control-lg" />
+                        @*<input type="password" id="form1Example23" class="form-control form-control-lg" />*@
+                        @Html.TextBox("matKhau", null, new { @class = "input-field form-control form-control-lg", @id = "form1Example23", required = "required" })
                         <label class="form-label" for="form1Example23">Password</label>
                     </div>
-
+                    @ViewBag.ThongBao
                     <div class="d-flex justify-content-around align-items-center mb-4">
                         <!-- Checkbox -->
                         <div class="form-check">
@@ -57,6 +62,8 @@
                     </a>
 
                 </form>
+                }
+
             </div>
         </div>
     </div>

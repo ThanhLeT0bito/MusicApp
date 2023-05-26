@@ -15,27 +15,98 @@ namespace ProjectHQTCSDL.Controllers
 
         ProjectMusicEntities db = new ProjectMusicEntities();
 
+        [HttpGet]
         public ActionResult SignIn()
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult SignIn(UserMain user)
+        {
+            if (ModelState.IsValid)
+            {
+                if (string.IsNullOrEmpty(user.tenDangNhap))
+                    ModelState.AddModelError(string.Empty, "Tên đăng nhập không được để trống");
+                if (string.IsNullOrEmpty(user.matKhau))
+                    ModelState.AddModelError(string.Empty, "Mật khẩu không được để trống");
+                //admin
+                if (ModelState.IsValid)
+                {
+                    var getUser = db.UserMains.FirstOrDefault(x => x.tenDangNhap == user.tenDangNhap && x.matKhau == user.matKhau && x.isAdmin == true);
+                    if (getUser != null)
+                    {
+                        return RedirectToAction("Index", "HomeAdmin");
+                    }
+                }
+                if (ModelState.IsValid)
+                {
+                    var getUser = db.UserMains.FirstOrDefault(x => x.tenDangNhap == user.tenDangNhap && x.matKhau == user.matKhau && x.isAdmin != true);
+                    if(getUser!= null)
+                    {
+                        Session["User"] = getUser;
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không đúng";
+                    }
+
+                }
+
+            }
+            return View();
+        }
+        [HttpGet]
         public ActionResult SignUp()
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult SignUp(UserMain user)
+        {
+            if (ModelState.IsValid)
+            {
+                if (String.IsNullOrEmpty(user.nameUser))
+                    ModelState.AddModelError(String.Empty, "không được để trống");
+                if(String.IsNullOrEmpty(user.tenDangNhap))
+                    ModelState.AddModelError(String.Empty, "không được để trống");
+                if (String.IsNullOrEmpty(user.matKhau))
+                    ModelState.AddModelError(String.Empty, "không được để trống");
+                if (ModelState.IsValid)
+                {
+                    var getUser = db.UserMains.FirstOrDefault(x => x.tenDangNhap == user.tenDangNhap && x.matKhau == user.matKhau && x.isAdmin != true);
+                    if (getUser != null)
+                    {
+                    ModelState.AddModelError(String.Empty, "Đã có người dùng");
+                    }
+                    else
+                    {
+                        db.UserMains.Add(user);
+                        db.SaveChanges();
+                        return RedirectToAction("SignIn", "Home");
+                    }
+                }
+            }
+            return View();
+        }
 
+        public ActionResult SignOut()
+        {
+            Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
         public ActionResult Index()
         {
             var getLstSong = db.Musics.ToList();
             ViewBag.getLstSong = getLstSong;
-            UserMain newUser = new UserMain()
-            {
-                idUser = 3,
-                tenDangNhap = "user01",
-                matKhau = "123"
-            };
+            //UserMain newUser = new UserMain()
+            //{
+            //    idUser = 3,
+            //    tenDangNhap = "user01",
+            //    matKhau = "123"
+            //};
 
-            Session["User"] = newUser;
+            //Session["User"] = newUser;
             return View();
         }
         public ActionResult Search(String search)
@@ -125,7 +196,9 @@ namespace ProjectHQTCSDL.Controllers
             ViewBag.Singer = getSinger;
             @ViewBag.sl = getMusic.Count;
 
-            return View(getMusic);
+            var getDSMusic = db.Database.SqlQuery<Music>("SELECT * FROM dbo.FUNC_LayDSBHTheoCaSi(@TuKhoa)", new SqlParameter("@TuKhoa", idCaSi)).ToList();
+
+            return View(getDSMusic);
         }
 
         [HttpPost]

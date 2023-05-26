@@ -46,11 +46,15 @@ namespace ProjectHQTCSDL.Controllers.ADMIN
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idTacGia,tenTacGia")] TacGia tacGia)
+        public ActionResult Create([Bind(Include = "tenTacGia")] TacGia tacGia)
         {
             if (ModelState.IsValid)
             {
-                db.TacGias.Add(tacGia);
+                int searchID = 0;
+                var getTacGia = db.TacGias.ToList();
+                searchID = getTacGia.Max(x => x.idTacGia) + 1;
+                //db.TacGias.Add(tacGia);
+                db.sp_ThemTacGia(searchID, tacGia.tenTacGia);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
