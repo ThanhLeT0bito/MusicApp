@@ -123,7 +123,7 @@ namespace ProjectHQTCSDL.Controllers.ADMIN
         public ActionResult DeleteConfirmed(int id)
         {
             Music music = db.Musics.Find(id);
-            //db.Musics.Remove(music);
+            //db.Musics.Remove(music);  
             db.DeleteMusicById(id);
             db.SaveChanges();
             return RedirectToAction("Index");
